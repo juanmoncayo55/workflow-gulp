@@ -7,7 +7,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : String(i); }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 (function (c, w, d) {
-  c("Hola Mundo");
+  alert("Hola Mundo");
+  c("hola otra vez");
   var Persona = /*#__PURE__*/function () {
     function Persona(nombre, edad, cedula, mascota) {
       _classCallCheck(this, Persona);

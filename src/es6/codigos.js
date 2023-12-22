@@ -1,5 +1,6 @@
 ((c, w, d) => {
-	c("Hola Mundo")
+	alert("Hola Mundo")
+	c("hola otra vez")
 	class Persona{
 		constructor(nombre, edad, cedula, mascota){
 			this.nombre = nombre;

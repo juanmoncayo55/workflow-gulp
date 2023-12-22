@@ -4,7 +4,16 @@
   "description": "Este workflow me servirá para desarrollar proyectos Frontend de forma mas agil con la ayuda de Gulp y muchas extensiones de gulp.",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pug": "gulp pug",
+    "sass": "gulp sass",
+    "es6": "gulp es6",
+    "serve": "browser-sync start --server --startPath \"dist\" --files \"dist/**/*.+(html|css|js)\"",
+    "build:dev": "npm run pug && npm run sass && npm run es6",
+    "watch:pug": "onchange \"./src/pug/**\" -- npm run pug",
+    "watch:sass": "onchange \"./src/scss/**\" -- npm run sass",
+    "watch:es6": "onchange \"./src/es6/**\" -- npm run es6",
+    "watch:dev": "parallelshell \"npm run serve\" \"npm run watch:pug\" \"npm run watch:sass\" \"npm run watch:es6\""
   },
   "repository": {
     "type": "git",
@@ -45,7 +54,7 @@
     "gulp-webp": "^4.0.0",
     "imagemin-pngquant": "^9.0.2",
     "onchange": "^7.1.0",
-    "parallelshell": "^3.0.2",
+    "parallelshell": "^3.0.1",
     "sass": "^1.69.5"
   },
   "dependencies": {
