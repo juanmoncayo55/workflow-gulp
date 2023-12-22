@@ -4,6 +4,10 @@ html(lang="es")
 		meta(charset="utf-8")
 		meta(name="viewport", content="width=device-width,initial-scale=1")
 		title= title
-		link(rel="stylesheet", href="css/estilos.css")
+		each css in files.CSS
+			link(rel="stylesheet", href=`../${css}`)
 	body
 		h1= title
+		
+		each js in files.JS
+			script(type="text/javascript", src=`../${js}`)

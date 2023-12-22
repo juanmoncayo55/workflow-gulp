@@ -2,7 +2,7 @@
 
 const gulp = require('gulp'),
 	pug = require('gulp-pug'),
-	sass = require('gulp-sass'),
+	sass = require('gulp-sass')(require('sass')),
 	babel = require('gulp-babel'),
 	imagemin = require('gulp-imagemin'),
 	pngquant = require('imagemin-pngquant'),
@@ -22,6 +22,7 @@ const gulp = require('gulp'),
 	},
 	files = {
 		CSS: [
+			`${dir.node_modules}/normalize.css/normalize.css`,
 			`${dir.node_modules}/font-awesome/css/font-awesome.min.css`,
 			`${dir.dist}/css/estilos.css`
 		],
@@ -43,13 +44,31 @@ const gulp = require('gulp'),
 				title: "Hola Mundo",
 				files: files
 			}
-		}
+		},
+		sass: {outputStyle: 'compressed'},
+		es6: { "presets": ["@babel/preset-env"] }
 	};
 
-gulp.task('pug', (done) =>{
+gulp.task('pug', (done) => {
 	gulp
 		.src(`${dir.src}/pug/*.pug`)
 		.pipe( pug(opts.pug) )
 		.pipe( gulp.dest(dir.dist) )
+	done()
+})
+
+gulp.task('sass', (done) => {
+	gulp
+		.src(`${dir.src}/scss/*.scss`)
+		.pipe( sass(opts.sass) )
+		.pipe( gulp.dest(`${dir.dist}/css`) )
+	done()
+})
+
+gulp.task('es6', (done) => {
+	gulp
+		.src(`${dir.src}/es6/*.js`)
+		.pipe( babel(opts.es6) )
+		.pipe( gulp.dest(`${dir.dist}/js`) )
 	done()
 })
