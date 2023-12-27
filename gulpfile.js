@@ -46,7 +46,23 @@ const gulp = require('gulp'),
 			}
 		},
 		sass: {outputStyle: 'compressed'},
-		es6: { "presets": ["@babel/preset-env"] }
+		es6: { "presets": ["@babel/preset-env"] },
+		imagemin:{
+			progressive: true,
+			use: [pngquant()]
+		},
+		svgmin : { 
+			plugins : [ 
+				{ convertColors : false },
+				{ removeAttrs : { attrs : ['fill'] } }
+			]
+		},
+		uncss : { html : [`${dir.dist}/*.html`] },
+		autoprefixer : { 
+			browsers : ['last 5 versions'],
+			cascade : false 
+		},
+		htmlmin : {collapseWhitespace: true}
 	};
 
 gulp.task('pug', (done) => {
@@ -72,3 +88,66 @@ gulp.task('es6', (done) => {
 		.pipe( gulp.dest(`${dir.dist}/js`) )
 	done()
 })
+
+gulp.task('img', (done) => {
+	gulp
+		.src(`${dir.src}/img/**/*.+(jpg|jpeg|png|gif)`)
+		.pipe( imagemin(opts.imagemin) )
+		.pipe( gulp.dest(`${dir.dist}/img`) );
+	done();
+})
+gulp.task('svg', () => {
+	gulp
+		.src( `${dir.src}/img/svg/*.svg` )
+		.pipe( svgmin(opts.svgmin) )
+		.pipe( gulp.dest(`${dir.dist}/img/svg`) );
+});
+gulp.task('webp', () => {
+	gulp
+		.src( `${dir.src}/img/**/*.+(png|jpeg|jpg)` )
+		.pipe( webp() )
+		.pipe( gulp.dest(`${dir.dist}/img/webp`) );
+});
+
+gulp.task('fonts', (done) => {
+	gulp
+		.src(files.fonts)
+		.pipe( gulp.dest(`${dir.dist/fonts}`) );
+	done();
+});
+
+gulp.task('statics', (done) => {
+	gulp
+		.src(files.statics)
+		.pipe( gulp.dest(dir.dist) )
+	done();
+});
+
+gulp.task('css', (done) => {
+	gulp
+		.src(files.CSS)
+		.pipe( concat(files.mCSS) )
+		.pipe( uncss(opts.uncss) )
+		.pipe( autoprefixer(opts.autoprefixer) )
+		.pipe( cleanCSS() )
+		.pipe( gulp.dest(`${dir.dist}/css`) );
+	done();
+});
+
+gulp.task('js', (done) => {
+	gulp
+		.src( files.JS )
+		.pipe( concat(files.mJS) )
+		.pipe( uglify() )
+		.pipe( gulp.dest(`${dir.dist}/js`) );
+	done();
+});
+
+gulp.task('html', (done) => {
+	gulp
+		.src(`${dir.dist}/*.html`)
+		.pipe( useref() )
+		.pipe( htmlmin(opts.htmlmin) )
+		.pipe( gulp.dest(dir.dist) );
+	done();
+});
