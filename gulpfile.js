@@ -69,25 +69,25 @@ gulp.task('pug', (done) => {
 	gulp
 		.src(`${dir.src}/pug/*.pug`)
 		.pipe( pug(opts.pug) )
-		.pipe( gulp.dest(dir.dist) )
-	done()
-})
+		.pipe( gulp.dest(dir.dist) );
+	done();
+});
 
 gulp.task('sass', (done) => {
 	gulp
 		.src(`${dir.src}/scss/*.scss`)
 		.pipe( sass(opts.sass) )
-		.pipe( gulp.dest(`${dir.dist}/css`) )
-	done()
-})
+		.pipe( gulp.dest(`${dir.dist}/css`) );
+	done();
+});
 
 gulp.task('es6', (done) => {
 	gulp
 		.src(`${dir.src}/es6/*.js`)
 		.pipe( babel(opts.es6) )
-		.pipe( gulp.dest(`${dir.dist}/js`) )
-	done()
-})
+		.pipe( gulp.dest(`${dir.dist}/js`) );
+	done();
+});
 
 gulp.task('img', (done) => {
 	gulp
@@ -95,13 +95,15 @@ gulp.task('img', (done) => {
 		.pipe( imagemin(opts.imagemin) )
 		.pipe( gulp.dest(`${dir.dist}/img`) );
 	done();
-})
+});
+
 gulp.task('svg', () => {
 	gulp
 		.src( `${dir.src}/img/svg/*.svg` )
 		.pipe( svgmin(opts.svgmin) )
 		.pipe( gulp.dest(`${dir.dist}/img/svg`) );
 });
+
 gulp.task('webp', () => {
 	gulp
 		.src( `${dir.src}/img/**/*.+(png|jpeg|jpg)` )
