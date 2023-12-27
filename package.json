@@ -4,7 +4,8 @@
   "description": "Este workflow me servirá para desarrollar proyectos Frontend de forma mas agil con la ayuda de Gulp y muchas extensiones de gulp.",
   "main": "gulpfile.js",
   "scripts": {
-	"test": "echo \"Error: no test specified\" && exit 1",
+	"dev:package": "npm install --save-dev @babel/preset-env babel-core babel-preset-env browser-sync gulp gulp-autoprefixer gulp-babel gulp-clean-css gulp-concat gulp-htmlmin gulp-imagemin gulp-pug gulp-sass gulp-svgmin gulp-uglify gulp-uncss gulp-useref gulp-webp imagemin-pngquant onchange parallelshel sass",
+	"dep:package": "npm install --save font-awesome normalize.css",
 	"pug": "gulp pug",
 	"sass": "gulp sass",
 	"es6": "gulp es6",
